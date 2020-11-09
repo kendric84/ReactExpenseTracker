@@ -1,55 +1,6 @@
 import React, { Component } from "react";
 
 class ExpenseInput extends Component {
-  constructor() {
-    super();
-    this.state = {
-      category: "",
-      location: "",
-      amount: "",
-      date: "",
-      description: "",
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({
-      [event.target.id]: event.target.value,
-    });
-  }
-
-  handleSubmit(event) {
-    if (
-      event.target.category.value === "" ||
-      event.target.location.value === "" ||
-      event.target.amount.value === "" ||
-      event.target.date.value === "" ||
-      event.target.description.value === ""
-    ) {
-      alert("Check for missing information");
-      event.preventDefault();
-      return;
-    } else {
-      let idMax = 0;
-      let newItem = [];
-      idMax =
-        Object.keys(localStorage).length === 0
-          ? 1
-          : Math.max.apply({}, Object.keys(localStorage)) +1;
-      newItem = {id: idMax,
-      category: event.target.category.value,
-      location: event.target.location.value,
-      amount: event.target.amount.value,
-      date: event.target.date.value,
-      description: event.target.description.value,
-      remove: "X"}
-      localStorage.setItem(idMax, JSON.stringify(newItem));
-    }
-  }
-
   render() {
     return (
       <div>
@@ -60,7 +11,7 @@ class ExpenseInput extends Component {
                 class="form-control"
                 id="category"
                 type="text"
-                value={this.state.category}
+                value={this.category}
                 list="category-options"
                 placeholder="Category..."
                 onChange={this.handleChange}
@@ -74,7 +25,7 @@ class ExpenseInput extends Component {
                 class="form-control"
                 id="location"
                 type="text"
-                value={this.state.location}
+                value={this.location}
                 list="location-options"
                 placeholder="Location..."
                 onChange={this.handleChange}
@@ -88,7 +39,7 @@ class ExpenseInput extends Component {
                 class="form-control"
                 id="amount"
                 type="text"
-                value={this.state.amount}
+                value={this.amount}
                 placeholder="Amount..."
                 onChange={this.handleChange}
               />
@@ -100,7 +51,7 @@ class ExpenseInput extends Component {
                 class="form-control"
                 id="date"
                 type="date"
-                value={this.state.date}
+                value={this.date}
                 onChange={this.handleChange}
               />
             </div>
@@ -111,7 +62,7 @@ class ExpenseInput extends Component {
                 class="form-control"
                 id="description"
                 type="text"
-                value={this.state.description}
+                value={this.description}
                 placeholder="Description..."
                 onChange={this.handleChange}
               />
