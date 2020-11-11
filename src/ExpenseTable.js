@@ -1,61 +1,49 @@
 import React, { Component } from "react";
 
 class ExpenseTable extends Component {
-  constructor() {
-    super();
-
-    let existingRows = [];
-    let keys = Object.keys(localStorage);
-    let i = keys.length;
-    
-    if (i > 0) {
-      while (i--) {
-        existingRows.push(JSON.parse(localStorage.getItem(keys[i])));
-      }
-      this.setState({rows: existingRows})
-      console.log(this.state)
-    }
+  constructor(props) {
+    super(props);
   }
 
-  render(props) {
+  render() {
     let tableRows = {};
-    if (this.props.rows === null) {
+    if (this.props.rows === []) {
       return <tr></tr>;
     } else {
-      console.log(this.props.rows);
       tableRows = this.props.rows.map((data) => {
         return (
           <tr>
-            <td class="text-center">{data.id}</td>
+            <td className="text-center">{data.id}</td>
             <td>{data.category}</td>
             <td>{data.location}</td>
-            <td class="text-center">${data.amount}</td>
-            <td class="text-center">{data.date}</td>
+            <td className="text-center">${data.amount}</td>
+            <td className="text-center">{data.date}</td>
             <td>{data.description}</td>
             <td
               id={data.id}
-              class="text-center"
-              onClick={() => localStorage.removeItem(data.id)}
+              className="text-center"
+              
             >
               {data.remove}
             </td>
           </tr>
         );
       });
+      //alert("table rows data"+ tableRows)
     }
 
     return (
       <div>
-        <table class="table table-striped">
-          <thead class="thead-light">
+        <table className="table table-striped">
+          <thead className="thead-light">
             <tr>
-              <th class="text-center">ID</th>
+              <th className="text-center">ID</th>
               <th>Category</th>
               <th>Location</th>
-              <th class="text-center">Amount</th>
-              <th class="text-center">Date</th>
+              <th className="text-center">Amount</th>
+              <th className="text-center">Date</th>
               <th>Description</th>
-              <th class="text-center">Remove</th>
+              <th className="text-center">Remove</th>
             </tr>
           </thead>
           <tbody>{tableRows}</tbody>
