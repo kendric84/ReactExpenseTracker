@@ -1,10 +1,43 @@
 import React, { Component } from "react";
 
 class ExpenseInput extends Component {
+  constructor(props) {
+    super(props);
+  }
+  
   render() {
+
+    let categoryOptions = {}
+    if (this.props.rows === []) {
+      return <option></option>;
+    } else {
+      let existingCategories = this.props.rows.map((a) => a.category)
+      categoryOptions = existingCategories.map((data) => {
+        return (
+          <option>{data}</option>
+        );
+      });
+    }
+
+    let locationOptions = {}
+    if (this.props.locations === []) {
+      return null;
+    } else {
+      let existingLocations = this.props.rows.map((a) => a.location)
+      locationOptions = existingLocations.map((data) => {
+        return (
+          <option>{data}</option>
+        );
+      });
+    }
+
     return (
-      <div>
-        <form className="form" id="user-input" onSubmit={this.props.handleSubmit}>
+      <div className="form-group">
+        <form
+          className="form"
+          id="user-input"
+          onSubmit={this.props.handleSubmit}
+        >
           <div className="form-group row">
             <div className="col-sm-9">
               <input
@@ -12,13 +45,14 @@ class ExpenseInput extends Component {
                 className="form-control"
                 id="category"
                 type="text"
-                list="category-options"
                 placeholder="Category..."
-                onChange={this.handleChange}
+                list="category-options"
+                onChange={this.props.handleChange}
                 name="category"
-              />
+              >
+              </input>
+              <datalist id="category-options">{categoryOptions}</datalist>
             </div>
-            <datalist id="category-options"> </datalist>
           </div>
           <div className="form-group row">
             <div className="col-sm-9">
@@ -27,12 +61,13 @@ class ExpenseInput extends Component {
                 className="form-control"
                 id="location"
                 type="text"
-                list="location-options"
                 placeholder="Location..."
-                onChange={this.handleChange}
+                list="location-options"
+                onChange={this.props.handleChange}
                 name="location"
-              />
-              <datalist id="location-options"> </datalist>
+              >
+              </input>
+              <datalist id="location-options">{locationOptions}</datalist>
             </div>
           </div>
           <div className="form-group row">
@@ -43,7 +78,7 @@ class ExpenseInput extends Component {
                 id="amount"
                 type="text"
                 placeholder="Amount..."
-                onChange={this.handleChange}
+                onChange={this.props.handleChange}
                 name="amount"
               />
             </div>
@@ -55,7 +90,7 @@ class ExpenseInput extends Component {
                 className="form-control"
                 id="date"
                 type="date"
-                onChange={this.handleChange}
+                onChange={this.props.handleChange}
                 name="date"
               />
             </div>
@@ -68,18 +103,24 @@ class ExpenseInput extends Component {
                 id="description"
                 type="text"
                 placeholder="Description..."
-                onChange={this.handleChange}
+                onChange={this.props.handleChange}
                 name="description"
               />
             </div>
           </div>
           <div className="form-group row" id="add-button-div">
-          <div className="row">
-          <div className="col-sm-9 offset-sm-3">
-            <button className="btn btn-danger" type="submit" id="add-button">
-              Add Expense
-            </button>
-          </div></div></div>
+            <div className="row">
+              <div className="col-sm-9 offset-sm-3">
+                <button
+                  className="btn btn-danger"
+                  type="submit"
+                  id="add-button"
+                >
+                  Add Expense
+                </button>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     );

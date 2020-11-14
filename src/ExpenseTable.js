@@ -21,15 +21,14 @@ class ExpenseTable extends Component {
             <td>{data.description}</td>
             <td
               id={data.id}
-              className="text-center"
-              
+              className="btn btn-danger"
+              onClick={this.props.handleDelete}
             >
               {data.remove}
             </td>
           </tr>
         );
       });
-      //alert("table rows data"+ tableRows)
     }
 
     return (
@@ -43,7 +42,7 @@ class ExpenseTable extends Component {
               <th className="text-center">Amount</th>
               <th className="text-center">Date</th>
               <th>Description</th>
-              <th className="text-center">Remove</th>
+              <th>Remove</th>
             </tr>
           </thead>
           <tbody>{tableRows}</tbody>
