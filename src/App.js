@@ -37,7 +37,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let idMax =
-      JSON.parse(localStorage.getItem("expense-tracker")) === null
+      JSON.parse(localStorage.getItem("expense-tracker")) === null || JSON.parse(localStorage.getItem("expense-tracker")).length === 0
         ? 1
         : Math.max.apply(
             {},
